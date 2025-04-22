@@ -32,9 +32,10 @@ gyro = GyroSensor(INPUT_5)
 motorC = LargeMotor(OUTPUT_C) # Magnet
 
 # Here is where your code starts
+bordas = []
+
 def main():
     tempo = time.time()
-    bordas = []
     
     while True:
         angulo_now = gyro.angle
@@ -58,9 +59,10 @@ def main():
                 tank_drive.on(left_speed = -70, right_speed = -70)
                 time.sleep(0.5)
                 tank_drive.off()
-        elif (next_borda(bordas, angulo_now) == True):
-            tank_drive.on(left_speed = -70, right_speed = -70)
-            time.sleep(0.5)
+        elif (next_borda(angulo_now) == True):
+            tank_drive.on(left_speed = 50, right_speed = -50)
+            time.sleep(1)
+            tank_drive.off()
         else:
             direcao, found = seguir_obstaculo(dist_frente, dist_esquerda, dist_direita)
             
@@ -111,9 +113,9 @@ def is_preso(a, b, c):
                 return True
     return False
         
-def next_borda(list, angulo):
-    for item in list:
-        if (min(abs(item - angulo), 360 - abs(item - angulo)) < 20):
+def next_borda(angulo):
+    for borda in bordas:
+        if (min(abs(borda - angulo), 360 - abs(borda - angulo)) < 20):
             return True
     return False
         
