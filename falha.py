@@ -120,7 +120,7 @@ def is_preso(a, b, c):
     
 def next_borda(angulo):
     for borda in bordas:
-        if (min(abs(borda - angulo), 360 - abs(borda - angulo)) < 40):
+        if (min(abs(borda - angulo), 360 - abs(borda - angulo)) < 30):
             return True
     return False
         
