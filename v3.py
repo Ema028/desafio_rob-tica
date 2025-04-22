@@ -39,6 +39,7 @@ def main():
     while True:
         if (color_sensor.color == 5): #código para vermelho no ev3
             tempo = time.time()
+            tank_drive.off()
             tank_drive.on(left_speed = -100, right_speed = -100)
             time.sleep(1)
             tank_drive.off()
