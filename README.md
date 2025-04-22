@@ -32,7 +32,7 @@ Problemas a abordar: O Robô ainda dá muitos giros desnecessários, perdendo te
 ## Versão 3 -
 A primeira alteração nessa versão é o recuo quando chega na borda, concertando dois problemas ocasionais: o robô não recuava o suficiente e ficava batendo na borda e relacionado com esse problema ele ficava preso na borda ocasionalmente, dando ré para fora.
 Essa alteração eu fiz adicionando uma condição para ele ver se saiu da borda depois de recuar e recuando mais se preciso, além disso a verificação de borda ficou bem mais segura e fluída desligando o motor entre mudanças de direção bruscas.
-A segunda mudança foi começar a registrar o tempo usando a lib time e adicionar uma condição para o robô virar para a direita caso tenha se passado 6 segundos sem encontrar bordas ou obstáculos. O número 6 foi usado após alguns testes pois foi o que teve a melhor resposta no sentido: Ainda alcança obstáculos longe sem virar antes de encontrá-los, mas não fica preso em uma área limpa já.
+A segunda mudança foi começar a registrar o tempo usando a lib time e adicionar uma condição para o robô virar para a direita caso tenha se passado 6 segundos sem encontrar bordas ou obstáculos. O número 6 foi usado após alguns testes pois foi o que teve a melhor resposta no sentido: Ainda alcança obstáculos longe sem virar antes de encontrá-los, mas não fica preso em uma área limpa já. Antes disso, tentei adicionar certa aleatoriedade no movimento inicialmente, achando que isso diversificaria as rotas, mas eu senti que isso piorou a execução, por isso a tentativa foi abortada. 
 
 Na primeira execução: 33 segundos. Na segunda: 42 segundos.
 
