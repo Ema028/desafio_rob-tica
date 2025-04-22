@@ -36,4 +36,4 @@ A segunda mudança foi começar a registrar o tempo usando a lib time e adiciona
 
 Na primeira execução: 33 segundos. Na segunda: 42 segundos.
 
-Essa versão tem movimentos mais fluídos que a 2 e perde menos tempo em caminhos vazios, mas mantém o problema da 2 versão de ser dificíl derrubar obstáculos presos na borda.
+Essa versão tem movimentos mais fluídos que a 2 e perde menos tempo em caminhos vazios, mas mantém o problema da 2 versão de ser dificíl derrubar obstáculos presos na borda e a confusão quando está entre dois obstáculos muito próximos.
