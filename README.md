@@ -23,11 +23,11 @@ O robô basicamente usa os sensores ultrassônicos para detectar se têm obstác
 O robô cai pra fora da borda e não sobrevive, por isso o tempo de execução não foi registrado.
 
 ## Versão 2 -
-Para resolver o problema de sobrevivência da primeira versão, agora o algoritimo usa o sensor de cor para identificar a borda vermelha e "foge" dela(da ré e vira). A velocidade para ir para frente foi diminuída pois o momento linear era muito grande com a velocidade máxima e às vezes o robô "virava" quando identificava a borda, o recuo era muito grande). Foi adicionada uma condição para o robô só virar quando o obstáculo estiver perto o suficiente para resolver o bug em que ele às vezes ficava preso entre 2 obstáculos muito perto um do outro.
+Para resolver o problema de sobrevivência da primeira versão, agora o algoritimo usa o sensor de cor para identificar a borda vermelha e "foge" dela(da ré e vira). A velocidade para ir para frente foi diminuída pois o momento linear era muito grande com a velocidade máxima e às vezes o robô "virava" quando identificava a borda, o recuo era muito grande). Foi adicionada uma condição para o robô só virar quando o obstáculo estiver perto o suficiente, diminuindo a frequência em que ele fica preso entre dois obstáculos sem saber para qual ir.
 
 Na sua primeira execução bem sucedida demorou 1 minuto e 40 segundos para derrubar todos os obstáculos. Na segunda: 1 minuto e 13 segundos.
 
-Problemas a abordar: O Robô ainda dá muitos giros desnecessários, perdendo tempo e tem dificuldade de pegar obstáculos presos perto da borda. Às vezes ainda fica confuso com dois obstáculos perto. Perde muito tempo repetindo os mesmos caminhos vazios.
+Problemas a abordar: O Robô ainda dá muitos giros desnecessários, perdendo tempo. Às vezes ainda fica confuso com dois obstáculos perto. Perde muito tempo repetindo os mesmos caminhos vazios.
 
 ## Versão 3 -
 A primeira alteração nessa versão é o recuo quando chega na borda, concertando dois problemas ocasionais: o robô não recuava o suficiente e ficava batendo na borda e relacionado com esse problema ele ficava preso na borda ocasionalmente, dando ré para fora.
