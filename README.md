@@ -1,5 +1,5 @@
 # desafio_robótica
-Todas as versões da parte 1 do desafio da inicial a final, com explicações da abordagem de cada etapa e o meu fluxo de pensamento até a ideia final.
+Todas as versões da parte 1 do desafio da inicial a final, com explicações da abordagem de cada etapa e o meu fluxo de pensamento até a ideia final. Todas feitas e testadas no gears simulator.
 
 Fluxograma da versão final feito na canva: https://www.canva.com/design/DAGlA0cr6u0/9jj2VaCKQ2rqt5wGnL2rmQ/view?utm_content=DAGlA0cr6u0&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hd6a9b83ef1
 
@@ -36,4 +36,4 @@ A segunda mudança foi começar a registrar o tempo usando a lib time e adiciona
 
 Na primeira execução: 33 segundos. Na segunda: 42 segundos.
 
-Essa versão tem movimentos mais fluídos que a 2 e perde menos tempo em caminhos vazios, mas mantém o problema da 2 versão de ser dificíl derrubar obstáculos presos na borda e a confusão quando está entre dois obstáculos muito próximos.
+Essa versão tem movimentos mais fluídos que a 2 e perde menos tempo em caminhos vazios, mas mantém o problema da 2 versão de ficar confuso quando está entre dois obstáculos muito próximos.
