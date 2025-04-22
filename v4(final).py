@@ -34,14 +34,20 @@ motorC = LargeMotor(OUTPUT_C) # Magnet
 # Here is where your code starts
 def main():
     tempo = time.time()
+    bordas = []
     
     while True:
         angulo_now = gyro.angle
-        bordas = []
-        if (color_sensor.color == 5 or next_borda(bordas, angulo_now) == True): #código para vermelho no ev3
+        
+        #distância do obstáculo detectado em cada sensor
+        dist_frente = ultra_frente.distance_centimeters
+        dist_esquerda = ultra_esquerda.distance_centimeters
+        dist_direita = ultra_direita.distance_centimeters
+        
+        if (color_sensor.color == 5): #código para vermelho no ev3
+            tank_drive.off()
             tempo = time.time()
             bordas.append(angulo_now)
-            tank_drive.off()
             tank_drive.on(left_speed = -100, right_speed = -100)
             time.sleep(1)
             tank_drive.off()
@@ -52,41 +58,36 @@ def main():
                 tank_drive.on(left_speed = -70, right_speed = -70)
                 time.sleep(0.5)
                 tank_drive.off()
-            
-        #distância do obstáculo detectado em cada sensor
-        dist_frente = ultra_frente.distance_centimeters
-        dist_esquerda = ultra_esquerda.distance_centimeters
-        dist_direita = ultra_direita.distance_centimeters
-        
-        direcao, found = seguir_obstaculo(dist_frente, dist_esquerda, dist_direita)
-        
-        if found:
-            tempo = time.time()
-        
-        if (direcao == 'front'):
-            if (dist_frente < 15):
-                desacelerar(70, 3, 10)
-            else:
-                tank_drive.on(left_speed = 70, right_speed = 70)
-        elif (direcao == 'left'):
-            tank_drive.on(left_speed = -50, right_speed = 50)
+        elif (next_borda(bordas, angulo_now) == True):
+            tank_drive.on(left_speed = -70, right_speed = -70)
+            time.sleep(0.5)
         else:
-            tank_drive.on(left_speed = 50, right_speed = -50)
+            direcao, found = seguir_obstaculo(dist_frente, dist_esquerda, dist_direita)
             
-        time_now = time.time()
-        
-        if is_preso(dist_frente, dist_esquerda, dist_direita):
-            tank_drive.on(left_speed = 70, right_speed = 70)
-            time.sleep(1)
+            if found:
+                tempo = time.time()
             
-        
-        if ((time_now - tempo) > 6):
-            tank_drive.on(left_speed = 50, right_speed = -50)
-            time.sleep(1)
-            tank_drive.off()
-            tank_drive.on(left_speed = 70, right_speed = 70)
-            tempo = time.time()
-        
+            if (direcao == 'front'):
+                tank_drive.on(left_speed = 70, right_speed = 70)
+            elif (direcao == 'left'):
+                tank_drive.on(left_speed = -50, right_speed = 50)
+            else:
+                tank_drive.on(left_speed = 50, right_speed = -50)
+                
+            time_now = time.time()
+            
+            if is_preso(dist_frente, dist_esquerda, dist_direita):
+                tank_drive.on(left_speed = 70, right_speed = 70)
+                time.sleep(1)
+                
+            
+            if ((time_now - tempo) > 6):
+                tank_drive.on(left_speed = 50, right_speed = -50)
+                time.sleep(1)
+                tank_drive.off()
+                tank_drive.on(left_speed = 70, right_speed = 70)
+                tempo = time.time()
+            
 #vai em direção ao obstáculo mais perto
 def seguir_obstaculo(a, b, c):
     direcoes = {'front': a,
@@ -109,17 +110,10 @@ def is_preso(a, b, c):
             if (count == 2):
                 return True
     return False
-    
-def desacelerar(v0, tempo, incremento):
-    
-    while (time.time() < tempo):
-        tank_drive.on(left_speed = vo, right_speed = vo)
-        time.sleep(0.1)
-        vo -= incremento
         
 def next_borda(list, angulo):
     for item in list:
-        if (abs(item - angulo) < 20):
+        if (min(abs(item - angulo), 360 - abs(item - angulo)) < 20):
             return True
     return False
         
