@@ -56,7 +56,6 @@ def main():
         time_now = time.time()
         
         if ((time_now - tempo) > 6):
-            steering_drive.on_for_seconds(steering = 0, speed = -100, seconds = 1)
             girar(90, 70)
             tempo = time.time()
         
