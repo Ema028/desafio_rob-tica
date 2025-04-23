@@ -106,6 +106,16 @@ def seguir_obstaculo(a, b, c):
         
     alvo = min(direcoes, key = direcoes.get)
     return alvo, True
+
+''' Função abortada:
+def desascelerar(vo, tempo):
+    start_time = time.time()
+    
+    while (time.time() - start_time < tempo):     
+        tank_drive.on(left_speed = vo, right_speed = vo)
+        time.sleep(0.1)
+        tank_drive.off()
+        vo -= 10 '''
     
 #verificar se o robô ficou preso entre obstáculos mt próximos
 def is_preso(a, b, c):
