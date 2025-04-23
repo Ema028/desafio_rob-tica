@@ -67,7 +67,7 @@ def check_borda(tempo):
     if (color_sensor.color == 5):
         girar(90, 70)
     else:
-       steering_drive.on_for_seconds(steering = 0, speed = 70, seconds = 0,3)
+        steering_drive.on_for_seconds(steering=0, speed=70, seconds=0.3)
     tempo = time.time()
 
 def girar(alpha, velocidade):
