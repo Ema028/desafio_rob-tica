@@ -68,11 +68,11 @@ def main():
             tempo = time.time()
         
         if (direcao == 'front'):
-            tank_drive.on(left_speed = 70, right_speed = 70)
+            tank_drive.on(left_speed = 100, right_speed = 100)
         elif (direcao == 'left'):
-            tank_drive.on(left_speed = -50, right_speed = 50)
+            tank_drive.on(left_speed = -70, right_speed = 70)
         else:
-            tank_drive.on(left_speed = 50, right_speed = -50)
+            tank_drive.on(left_speed = 70, right_speed = -70)
             
         time_now = time.time()
         
