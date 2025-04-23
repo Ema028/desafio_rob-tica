@@ -62,13 +62,12 @@ def main():
         
 def check_borda(tempo):
     if (color_sensor.color == 5):
-        time.sleep(0.05)
-        #evitar falsos positivos
-        if (color_sensor.color == 5):
+        time.sleep(0.05) #evitar falsos positivos
+        while (color_sensor.color == 5):
             steering_drive.off()
-            tempo = time.time()
-            steering_drive.on_for_seconds(steering = 0, speed = -100, seconds = 1)
             girar(90, 70)
+            steering_drive.on_for_seconds(steering = 0, speed = 100, seconds = 0.3)
+            tempo = time.time()
 
 def girar(alpha, velocidade):
     beta = gyro.angle
