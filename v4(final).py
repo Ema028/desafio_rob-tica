@@ -50,6 +50,7 @@ def main():
                 tank_drive.on(left_speed = -70, right_speed = -70)
                 time.sleep(0.5)
                 tank_drive.off()
+                continue
             
         #distância do obstáculo detectado em cada sensor
         dist_frente = ultra_frente.distance_centimeters
@@ -57,6 +58,11 @@ def main():
         dist_direita = ultra_direita.distance_centimeters
         
         direcao, found = seguir_obstaculo(dist_frente, dist_esquerda, dist_direita)
+        
+        if is_preso(dist_frente, dist_esquerda, dist_direita):
+            tank_drive.on(left_speed = 70, right_speed = 70)
+            time.sleep(0.5)
+            continue
         
         if found:
             tempo = time.time()
@@ -69,10 +75,6 @@ def main():
             tank_drive.on(left_speed = 50, right_speed = -50)
             
         time_now = time.time()
-        
-        if is_preso(dist_frente, dist_esquerda, dist_direita):
-            tank_drive.on(left_speed = 70, right_speed = 70)
-            time.sleep(0.5)
         
         if ((time_now - tempo) > 6):
             tank_drive.on(left_speed = 50, right_speed = -50)
