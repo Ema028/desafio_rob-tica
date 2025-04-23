@@ -105,15 +105,5 @@ def is_preso(a, b, c):
             if (count == 2):
                 return True
     return False
-
-''' Função abortada:
-def desascelerar(vo, tempo):
-    start_time = time.time()
-    
-    while (time.time() - start_time < tempo):     
-        tank_drive.on(left_speed = vo, right_speed = vo)
-        time.sleep(0.1)
-        tank_drive.off()
-        vo -= 10 '''
         
 main()
