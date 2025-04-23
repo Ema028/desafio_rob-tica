@@ -34,6 +34,8 @@ motorC = LargeMotor(OUTPUT_C) # Magnet
 
 # Here is where your code starts
 def main():
+    gyro.reset()
+    time.sleep(0.5)
     tempo = time.time()
     
     while True:
@@ -44,11 +46,9 @@ def main():
             tempo = time.time()
         elif (ultra_esquerda.distance_centimeters < 30):
             steering_drive.on(steering = -50, speed = 70)
-            check_borda(tempo)
             tempo = time.time()
         elif (ultra_direita.distance_centimeters < 30):
             steering_drive.on(steering = 50, speed = 70)
-            check_borda(tempo)
             tempo = time.time()
         else:
             steering_drive.on(steering = 0, speed = 70)
@@ -57,15 +57,29 @@ def main():
         
         if ((time_now - tempo) > 6):
             steering_drive.on_for_seconds(steering = 0, speed = -100, seconds = 1)
-            steering_drive.on_for_seconds(steering = 100, speed = 70, seconds = 1)
-            check_borda(tempo)
+            girar(90, 70)
             tempo = time.time()
         
 def check_borda(tempo):
-    if (color_sensor.color == 5): #código para vermelho no ev3
-        steering_drive.off()
-        tempo = time.time()
-        steering_drive.on_for_seconds(steering = 0, speed = -100, seconds = 1)
-        steering_drive.on_for_seconds(steering = 100, speed = 70, seconds = 1)
+    if (color_sensor.color == 5):
+        time.sleep(0.05)
+        #evitar falsos positivos
+        if (color_sensor.color == 5):
+            steering_drive.off()
+            tempo = time.time()
+            steering_drive.on_for_seconds(steering = 0, speed = -100, seconds = 1)
+            girar(90, 70)
+
+def girar(alpha, velocidade):
+    beta = gyro.angle
+    alvo = beta + alpha
+    steering_drive.on(steering = 100, speed = velocidade)
+    while (gyro.angle < alvo):
+        if (color_sensor.color == 5):
+            steering_drive.off()
+            steering_drive.on_for_seconds(steering = 0, speed = -100, seconds = 1)
+            girar(90, velocidade)
+        time.sleep(0.01)
+    steering_drive.off()
         
 main()
