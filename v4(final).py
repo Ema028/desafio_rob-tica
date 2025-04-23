@@ -43,12 +43,12 @@ def main():
             tank_drive.on(left_speed = -100, right_speed = -100)
             time.sleep(1)
             tank_drive.off()
-            tank_drive.on(left_speed = 50, right_speed = -50)
+            tank_drive.on(left_speed = 70, right_speed = -70)
             time.sleep(1)
             tank_drive.off()
             if (color_sensor.color == 5): #se continuar na borda recua mais
                 tank_drive.on(left_speed = -70, right_speed = -70)
-                time.sleep(0.5)
+                time.sleep(1)
                 tank_drive.off()
                 continue
             
@@ -77,7 +77,7 @@ def main():
         time_now = time.time()
         
         if ((time_now - tempo) > 6):
-            tank_drive.on(left_speed = 50, right_speed = -50)
+            tank_drive.on(left_speed = 70, right_speed = -70)
             time.sleep(1)
             tank_drive.off()
             tank_drive.on(left_speed = 70, right_speed = 70)
