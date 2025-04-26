@@ -32,7 +32,6 @@ gyro = GyroSensor(INPUT_5)
 
 motorC = LargeMotor(OUTPUT_C) # Magnet
 
-# Here is where your code starts
 def main():
     gyro.reset()
     time.sleep(0.5)
@@ -41,13 +40,13 @@ def main():
     while True:
         check_borda(tempo)
         
-        if (ultra_frente.distance_centimeters < 30):
+        if (ultra_frente.distance_centimeters < 20):
             steering_drive.on(steering = 0, speed = 70)
             tempo = time.time()
-        elif (ultra_esquerda.distance_centimeters < 30):
+        elif (ultra_esquerda.distance_centimeters < 20):
             steering_drive.on(steering = -50, speed = 70)
             tempo = time.time()
-        elif (ultra_direita.distance_centimeters < 30):
+        elif (ultra_direita.distance_centimeters < 20):
             steering_drive.on(steering = 50, speed = 70)
             tempo = time.time()
         else:
@@ -55,9 +54,9 @@ def main():
             
         time_now = time.time()
         
-        if ((time_now - tempo) > 6):
+        if ((time_now - tempo) > 3):
             check_borda(tempo)
-            girar(90, 70)
+            girar(20, 70)
             tempo = time.time()
         
 def check_borda(tempo):
@@ -65,7 +64,7 @@ def check_borda(tempo):
         time.sleep(0.05) #evitar falsos positivos
         if (color_sensor.color == 5):
             steering_drive.off()
-            girar(90, 70)
+            girar(40, 70)
         tempo = time.time()
 
 def girar(alpha, velocidade):
@@ -76,7 +75,7 @@ def girar(alpha, velocidade):
         if (color_sensor.color == 5):
             steering_drive.off()
             steering_drive.on_for_seconds(steering = 0, speed = -100, seconds = 1)
-            girar(90, velocidade)
+            girar(alpha, velocidade)
         time.sleep(0.01)
     steering_drive.off()
         
